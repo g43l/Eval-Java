@@ -5,9 +5,8 @@ import it.akademy.barbecueapi.models.Barbecue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
@@ -18,10 +17,12 @@ public class BarbecueController {
 
     private final BarbecueDao barbecueDao;
 //    private final PersonDao personDao;
-//    private final MeatDao meatDao;
+//    private final FoodDao meatDao;
 
     @Autowired
-    public BarbecueController(BarbecueDao barbecueDao) {    //TODO: Rajouter Person et Meat quand ils seront créés
+    public BarbecueController(BarbecueDao barbecueDao) {    //TODO: Rajouter Person et Food quand ils seront créés
+//        this.personDao = personDao;
+//        this.foodDao = foodDao;
         this.barbecueDao = barbecueDao;
     }
 
@@ -29,5 +30,11 @@ public class BarbecueController {
     public ResponseEntity<List<Barbecue>> getAllBarbecues() {
         List<Barbecue> barbecues = barbecueDao.findAll();
         return new ResponseEntity<>(barbecues, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Barbecue> createBarbecue(@RequestBody Barbecue barbecue) {
+        Barbecue barbecue1 = barbecueDao.save(barbecue);
+        return new ResponseEntity<>(barbecue1, HttpStatus.CREATED);
     }
 }

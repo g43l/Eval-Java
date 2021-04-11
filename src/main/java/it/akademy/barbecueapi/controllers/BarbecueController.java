@@ -52,13 +52,12 @@ public class BarbecueController {
 
     @GetMapping("/country/{country}") // on rajoute country/ avant sinon ca ne marche pas avec "/{country}" , interférence avec le "/{id}"
     public ResponseEntity<List<Barbecue>> getAllBarbecuesByCountry(@PathVariable String country){
-        List<Barbecue> barbecues = barbecueDao.findAllByCity(country);
+        List<Barbecue> barbecues = barbecueDao.findAllByCountry(country);
         if(barbecues == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(barbecues, HttpStatus.OK);
     }
-
 
     @PostMapping
     public ResponseEntity<Barbecue> createBarbecue(@RequestBody Barbecue barbecue) {
@@ -66,9 +65,22 @@ public class BarbecueController {
         return new ResponseEntity<>(barbecue1, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Barbecue> putBarbecue(@PathVariable int id, @RequestBody Barbecue barbecue){
+        Barbecue modifiedBarbecue = barbecueDao.findById(id);
+
+        if(modifiedBarbecue == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        barbecue.setId(id);
+        modifiedBarbecue = barbecueDao.save(barbecue);
+        return new ResponseEntity<>(modifiedBarbecue, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
-    //<?> ==> remplace un void car rien à renvoyer
-    public ResponseEntity<?> deleteBarbecue(@PathVariable int id) {
+
+    public ResponseEntity<?> deleteBarbecue(@PathVariable int id) {  //<?> ==> remplace un void car rien à renvoyer
         Barbecue barbecue = barbecueDao.findById(id);
         //si le Barbecue(id) n'existe pas :
         if (barbecue == null) {

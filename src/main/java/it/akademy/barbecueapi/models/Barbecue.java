@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Entity
@@ -14,8 +15,9 @@ public class Barbecue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private DateFormat date;
-    private String address;
+    private LocalDate date;
+    private int streetNumber;
+    private String streetName;
     private String city;
     private String country;
 
@@ -29,52 +31,15 @@ public class Barbecue {
 
     public Barbecue() {}
 
-    public Barbecue(DateFormat date, String address, String city, String country) {
+    public Barbecue(LocalDate date, int streetNumber, String streetName, String city, String country) {
         this.date = date;
-        this.address = address;
+        this.streetNumber = streetNumber;
+        this.streetName = streetName;
         this.city = city;
         this.country = country;
 //        this.people = new ArrayList<>();
 //        this.meats = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public DateFormat getDate() {
-        return date;
-    }
-
-    public void setDate(DateFormat date) {
-        this.date = date;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
 }

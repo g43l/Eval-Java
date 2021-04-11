@@ -16,6 +16,8 @@ public interface PersonDao extends JpaRepository<Person, Integer> {
     Person findById(int id);
     List <Person> findAllByFirstName(String firstName);
     List <Person> findAllByLastName(String lastName);
+    Person save(Person person);
 
+    void deleteById(int id);
 
 }

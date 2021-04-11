@@ -17,7 +17,7 @@ public class BarbecueController {
 
     private final BarbecueDao barbecueDao;
 //    private final PersonDao personDao;
-//    private final FoodDao meatDao;
+//    private final FoodDao foodDao;
 
     @Autowired
     public BarbecueController(BarbecueDao barbecueDao) {    //TODO: Rajouter Person et Food quand ils seront créés

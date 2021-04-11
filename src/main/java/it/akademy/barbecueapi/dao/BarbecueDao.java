@@ -10,5 +10,8 @@ public interface BarbecueDao extends JpaRepository<Barbecue, Integer> {
     @Override
     List <Barbecue> findAll();
 
+    Barbecue findById(int id);
+
+
     Barbecue save(Barbecue barbecue);
 }

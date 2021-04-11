@@ -32,6 +32,16 @@ public class BarbecueController {
         return new ResponseEntity<>(barbecues, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Barbecue> getBarbecueById(@PathVariable int id){
+        Barbecue barbecue = barbecueDao.findById(id);
+        if(barbecue == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(barbecue, HttpStatus.OK);
+    }
+
+
     @PostMapping
     public ResponseEntity<Barbecue> createBarbecue(@RequestBody Barbecue barbecue) {
         Barbecue barbecue1 = barbecueDao.save(barbecue);

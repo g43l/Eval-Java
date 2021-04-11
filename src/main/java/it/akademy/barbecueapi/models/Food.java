@@ -11,6 +11,7 @@ public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+    private int id;
     private String name;
     private boolean cooked;
 
@@ -34,5 +35,13 @@ public class Food {
 
     public void setCooked(boolean cooked) {
         this.cooked = cooked;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

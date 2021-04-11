@@ -1,9 +1,10 @@
 package it.akademy.barbecueapi.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Food {
@@ -15,10 +16,38 @@ public class Food {
     private String name;
     private boolean cooked;
 
+    @JsonManagedReference(value = "foods-people")
+    @ManyToMany
+    private List<Person> people;
+
+    @JsonManagedReference(value = "foods-barbecues")
+    @ManyToMany
+    private List<Barbecue> barbecues;
+
     public Food(){}
+
+    public List<Person> getPeople() {
+        return people;
+    }
+
+    public void setPeople(List<Person> people) {
+        this.people = people;
+    }
+
+    public List<Barbecue> getBarbecues() {
+        return barbecues;
+    }
+
+    public void setBarbecues(List<Barbecue> barbecues) {
+        this.barbecues = barbecues;
+    }
+
     public Food(String name, boolean cooked) {
         this.name = name;
         this.cooked = cooked;
+        this.people = new ArrayList<>();
+        this.barbecues = new ArrayList<>();
+
     }
 
     public String getName() {

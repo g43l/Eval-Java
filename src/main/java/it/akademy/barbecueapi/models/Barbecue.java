@@ -1,12 +1,12 @@
 package it.akademy.barbecueapi.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 
@@ -22,8 +22,34 @@ public class Barbecue {
     private String city;
     private String country;
 
+    @JsonManagedReference(value = "barbecue-people")
+    @OneToMany
+    private List<Person> people;
+
+    @JsonManagedReference(value = "barbecue-foods")
+    @OneToMany
+    private List<Food> foods;
+
+
+
 
     public Barbecue() {}
+
+    public List<Person> getPeople() {
+        return people;
+    }
+
+    public void setPeople(List<Person> people) {
+        this.people = people;
+    }
+
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
+    }
 
     public Barbecue(LocalDate date, int streetNumber, String streetName, String city, String country) {
         this.date = date;
@@ -31,8 +57,8 @@ public class Barbecue {
         this.streetName = streetName;
         this.city = city;
         this.country = country;
-//        this.people = new ArrayList<>();
-//        this.meats = new ArrayList<>();
+        this.people = new ArrayList<>();
+        this.foods = new ArrayList<>();
     }
 
     public int getId() {

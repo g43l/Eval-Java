@@ -44,7 +44,7 @@ public class Food {
 
     public Food(String name, boolean cooked) {
         this.name = name;
-        this.cooked = cooked;
+        this.cooked = false;
         this.people = new ArrayList<>();
         this.barbecues = new ArrayList<>();
 

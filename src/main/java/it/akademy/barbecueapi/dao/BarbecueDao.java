@@ -12,6 +12,11 @@ public interface BarbecueDao extends JpaRepository<Barbecue, Integer> {
 
     Barbecue findById(int id);
 
+    List <Barbecue> findAllByCity(String city);
+
+    List <Barbecue> findAllByCountry(String country);
 
     Barbecue save(Barbecue barbecue);
+
+    void deleteById(int id);
 }
